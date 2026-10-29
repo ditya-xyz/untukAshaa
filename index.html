@@ -229,10 +229,58 @@ img {
 p {
     overflow-wrap: break-word;
 }
+
+    .foto-samping,
+.foto-pacar img {
+    cursor: pointer;
+    transition: transform 0.35s ease;
+}
+
+/* Latar saat foto dibuka */
+#fotoOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(70, 25, 60, 0.65);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+}
+
+/* Foto besar di tengah */
+#fotoOverlay img {
+    max-width: 85vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 5px solid white;
+    border-radius: 18px;
+    box-shadow: 0 0 35px #ff9bd5;
+    animation: fotoMuncul 0.4s ease;
+}
+
+@keyframes fotoMuncul {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-8deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
 </style>
 </head>
     
 <body>
+    
+    <div id="fotoOverlay" onclick="tutupFoto()">
+    <img id="fotoBesar" src="" alt="Foto Ashaa">
+</div>
+    
 <div id="hujan"></div>
 
 <!-- HALAMAN PEMBUKA -->
@@ -289,12 +337,10 @@ p {
         <div id="surat">
             <h3>To My Love 🌷</h3>
             <p>
-                Ashaa Sayangg,maaf yaa terkadang hari hari kamu terasa cape dan berat
-                istirahat dulu ya.
-            </p>
-            <p>
-                Aku mau mengenal semua sisi dirimu.
-                termasuk saat kamu sedang sedih,
+                Ashaa Sayangg,maaf yaa terkadang hari hari kamu terasa cape dan berat.
+                dan saat kamu sedang ngechat aku, aku kadang lama balesnya dan itu bikin kamu sakit hati.
+                kalo ada masalah cerita yaa jangan di penndem sendiri.
+                sekarang istirahat dulu ya.
             </p>
             <p>
                 Terima kasih karena sudah bertahan sejauh ini.
@@ -389,6 +435,25 @@ function buatHati() {
 }
 
 setInterval(buatHati, 400);
+    
+    // Efek klik foto menuju tengah
+document.querySelectorAll(
+    ".foto-pacar img, .foto-samping"
+).forEach(foto => {
+    foto.addEventListener("click", function () {
+        const overlay = document.getElementById("fotoOverlay");
+        const fotoBesar = document.getElementById("fotoBesar");
+
+        fotoBesar.src = this.src;
+        overlay.style.display = "flex";
+    });
+});
+
+function tutupFoto() {
+    document.getElementById("fotoOverlay").style.display = "none";
+    document.getElementById("fotoBesar").src = "";
+}
+    
 </script>
 
 </body>
