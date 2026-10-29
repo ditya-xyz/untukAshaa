@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Favorite Person 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    color: #87415f;
+    background: linear-gradient(135deg, #ffdce9, #f0d7ff, #ffe6ef);
+    overflow-x: hidden;
+}
+
+#pembuka {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #ffdce9, #f0d7ff);
+    transition: opacity 0.8s, visibility 0.8s;
+}
+
+#pembuka.tutup {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+h1 {
+    color: #d94f89;
+    margin-bottom: 12px;
+}
+
+.ikon {
+    font-size: 75px;
+    animation: detak 1.2s infinite;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 13px 23px;
+    background: #e968a1;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px #d94f8940;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.06);
+}
+
+#konten {
+    display: none;
+    padding: 30px 16px;
+    animation: muncul 1s ease;
+}
+
+.kartu {
+    max-width: 440px;
+    margin: 20px auto;
+    padding: 30px 23px;
+    border: 1px solid #ffffffc9;
+    border-radius: 28px;
+    text-align: center;
+    background: #ffffffc9;
+    box-shadow: 0 15px 45px #ac638b26;
+    backdrop-filter: blur(10px);
+}
+
+p {
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.pink {
+    color: #d94f89;
+    font-weight: bold;
+}
+
+#surat {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff0f6;
+    border-radius: 18px;
+    animation: muncul 0.6s ease;
+}
+
+#hujan {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.hatiJatuh {
+    position: absolute;
+    top: -40px;
+    animation: jatuh linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes detak {
+    50% { transform: scale(1.15); }
+}
+
+@keyframes muncul {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes jatuh {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="hujan"></div>
+
+<!-- HALAMAN PEMBUKA -->
+<div id="pembuka">
+    <div class="ikon">💌</div>
+    <h1>Hai, Ashaa...</h1>
+    <p>Aku punya sesuatu buat kamu 🥺</p>
+    <p>Kalau hari ini kamu lagi sedih,<br>
+       buka ini sebentar ya, sayang.</p>
+
+    <button onclick="bukaWebsite()">
+        Buka ya, Sayang 💗
+    </button>
+</div>
+
+<!-- HALAMAN UTAMA -->
+<main id="konten">
+    <div class="kartu">
+        <div class="ikon">🫂</div>
+        <h1>For My Favorite Person</h1>
+        <p style="color:#bc79a0">♡ a little message just for you ♡</p>
+
+        <p id="tulisan"></p>
+
+        <p class="pink">
+            Kamu nggak harus selalu kuat.
+            Kamu boleh istirahat, kamu boleh nangis,
+            dan kamu boleh cerita sama aku. ❤️
+        </p>
+
+        <button onclick="bukaSurat()">
+            💌 Buka surat kecilku
+        </button>
+
+        <div id="surat">
+            <h3>To My Love 🌷</h3>
+            <p>
+                Sayang, kalau hari ini dunia terasa berat,
+                istirahat dulu ya.
+            </p>
+            <p>
+                Kamu nggak perlu pura-pura bahagia di depanku.
+                Aku mau mengenal semua sisi dirimu,
+                termasuk saat kamu sedang sedih.
+            </p>
+            <p>
+                Terima kasih karena sudah bertahan sejauh ini.
+                Aku bangga sama kamu, bahkan untuk hal-hal kecil
+                yang mungkin kamu sendiri nggak sadari.
+            </p>
+            <p class="pink">
+                Kalau kamu merasa sendirian,
+                ingat bahwa kamu pantas disayangi. ❤️
+            </p>
+            <h2>i love you, always 💗</h2>
+        </div>
+
+        <p style="margin-top:25px;color:#bd7d9d">
+            dibuat dengan penuh cinta ♡
+        </p>
+    </div>
+</main>
+
+<!-- =================================
+     GANTI URL MP3 DI BAGIAN INI
+================================== -->
+<audio id="lagu" loop preload="none"></audio>
+
+<script>
+// GANTI DENGAN LINK MP3 LANGSUNG MILIKMU
+const URL_MP3 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+
+const audio = document.getElementById("lagu");
+audio.src = URL_MP3;
+
+async function bukaWebsite() {
+    document.getElementById("pembuka").classList.add("tutup");
+
+    setTimeout(() => {
+        document.getElementById("pembuka").style.display = "none";
+    }, 850);
+
+    document.getElementById("konten").style.display = "block";
+
+    // Musik dimulai dari klik pembuka
+    try {
+        await audio.play();
+    } catch (error) {
+        console.log("Musik tidak dapat diputar:", error);
+    }
+
+    // Efek tulisan mengetik
+    const pesan =
+        "Hai, sayangku... ❤️ Aku nggak tahu seberat apa hari yang kamu lewati. Mungkin kamu capek, kecewa, atau ada banyak hal yang kamu pendam sendiri. Aku cuma mau kamu tahu kalau perasaanmu itu penting. Kamu nggak harus menyelesaikan semuanya hari ini. Pelan-pelan aja, ya? Aku harap setelah membaca ini, hatimu terasa sedikit lebih tenang. Terima kasih sudah hadir di hidupku. Aku sayang kamu. 💗";
+
+    const tempat = document.getElementById("tulisan");
+    tempat.textContent = "";
+
+    let i = 0;
+
+    function ketik() {
+        if (i < pesan.length) {
+            tempat.textContent += pesan.charAt(i);
+            i++;
+            setTimeout(ketik, 38);
+        }
+    }
+
+    ketik();
+}
+
+function bukaSurat() {
+    const surat = document.getElementById("surat");
+
+    surat.style.display =
+        surat.style.display === "block" ? "none" : "block";
+}
+
+// Hujan hati romantis
+function buatHati() {
+    const area = document.getElementById("hujan");
+    const hati = document.createElement("span");
+
+    hati.className = "hatiJatuh";
+    hati.textContent = ["💗", "💕", "♡", "🌸", "💖"][
+        Math.floor(Math.random() * 5)
+    ];
+
+    hati.style.left = Math.random() * 100 + "%";
+    hati.style.fontSize = (12 + Math.random() * 17) + "px";
+    hati.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    area.appendChild(hati);
+
+    setTimeout(() => hati.remove(), 9500);
+}
+
+setInterval(buatHati, 400);
+</script>
+
+</body>
+</html>
